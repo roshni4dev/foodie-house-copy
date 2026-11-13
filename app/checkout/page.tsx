@@ -82,6 +82,9 @@ export default function Checkout() {
                     };
 
                     localStorage.setItem("lastOrder", JSON.stringify(order));
+                    const oldOrders = JSON.parse(localStorage.getItem("orders") || "[]");
+oldOrders.push(order);
+localStorage.setItem("orders", JSON.stringify(oldOrders));
                     router.push("/order-success");
                     localStorage.removeItem("cart");
                     setCart([]);
