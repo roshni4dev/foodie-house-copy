@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function Admin() {
   const [orders, setOrders] = useState<any[]>([]);
+  const [feedback, setFeedback] = useState<any[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +21,10 @@ export default function Admin() {
       localStorage.getItem("orders") || "[]"
     );
     setOrders(savedOrders);
+    const savedFeedback = JSON.parse(
+  localStorage.getItem("feedback") || "[]"
+);
+setFeedback(savedFeedback);
   }, [router]);
 
   const updateStatus = (index: number, status: string) => {
@@ -150,6 +155,27 @@ export default function Admin() {
                       </div>
         ))
       )}
+      <h2>Customer Feedback ⭐</h2>
+
+{feedback.length === 0 ? (
+  <p>No feedback found!</p>
+) : (
+  feedback.map((item, index) => (
+    <div
+      key={index}
+      style={{
+        background: "white",
+        padding: "15px",
+        marginBottom: "10px",
+        borderRadius: "10px"
+      }}
+    >
+      <h3>Rating: {"⭐".repeat(item.rating)}</h3>
+      <p>Review: {item.review}</p>
+      <p>Date: {item.date}</p>
+    </div>
+  ))
+)}
     </div>
   );
 }
