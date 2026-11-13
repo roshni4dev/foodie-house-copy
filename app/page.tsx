@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 export default function Home() {
     return (
         <div className={styles.container}>
+            <h1>Welcome to Foodie House!</h1>
             <nav className="navbar">
                 <ul>
                     <li><Link href="/">Home</Link></li>
