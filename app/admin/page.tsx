@@ -155,27 +155,27 @@ setFeedback(savedFeedback);
                       </div>
         ))
       )}
-      <h2>Customer Feedback ⭐</h2>
+         <h2>Customer Feedback ⭐</h2>
 
-{feedback.length === 0 ? (
-  <p>No feedback found!</p>
-) : (
-  feedback.map((item, index) => (
-    <div
-      key={index}
-      style={{
-        background: "white",
-        padding: "15px",
-        marginBottom: "10px",
-        borderRadius: "10px"
-      }}
-    >
-      <h3>Rating: {"⭐".repeat(item.rating)}</h3>
-      <p>Review: {item.review}</p>
-      <p>Date: {item.date}</p>
+      {feedback.length === 0 ? (
+        <p>No feedback found!</p>
+      ) : (
+        feedback.map((item, index) => (
+          <div
+            key={index}
+            style={{
+              background: "white",
+              padding: "15px",
+              marginBottom: "10px",
+              borderRadius: "10px"
+            }}
+          >
+            <h3>Rating: {"⭐".repeat(item.rating)}</h3>
+            <p>Review: {item.review}</p>
+            <p>Date: {item.date}</p>
+          </div>
+        ))
+      )}
     </div>
-  ))
-</div>
   );
 }
-  
