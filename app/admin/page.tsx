@@ -175,8 +175,7 @@ setFeedback(savedFeedback);
       <p>Date: {item.date}</p>
     </div>
   ))
-
-    </div>
+</div>
   );
 }
   
