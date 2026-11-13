@@ -22,6 +22,18 @@ export default function Admin() {
     setOrders(savedOrders);
   }, [router]);
 
+  const updateStatus = (index: number, status: string) => {
+    const updatedOrders = [...orders];
+    updatedOrders[index].status = status;
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(updatedOrders)
+    );
+
+    setOrders(updatedOrders);
+  };
+
   const totalSales = orders.reduce(
     (sum, order) => sum + order.total,
     0
@@ -42,14 +54,7 @@ export default function Admin() {
         Admin Dashboard 👩‍💻
       </h1>
 
-      <button onClick={logout} style={{
-        background: "#e85d04",
-        color: "white",
-        padding: "10px 20px",
-        border: "none",
-        borderRadius: "8px",
-        cursor: "pointer"
-      }}>
+      <button onClick={logout}>
         Logout
       </button>
 
@@ -79,6 +84,33 @@ export default function Admin() {
             ))}
 
             <h3>Total: ₹{order.total}</h3>
+
+            <p>
+              Status: {order.status || "Pending"}
+            </p>
+
+            <button
+              onClick={() => updateStatus(index, "Accepted")}
+              style={{
+                background: "green",
+                color: "white",
+                padding: "10px",
+                marginRight: "10px"
+              }}
+            >
+              Accept
+            </button>
+
+            <button
+              onClick={() => updateStatus(index, "Rejected")}
+              style={{
+                background: "red",
+                color: "white",
+                padding: "10px"
+              }}
+            >
+              Reject
+            </button>
           </div>
         ))
       )}
