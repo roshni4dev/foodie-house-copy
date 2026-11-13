@@ -1,19 +1,36 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Admin() {
   const [orders, setOrders] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
-    const savedOrders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const isLoggedIn = localStorage.getItem("adminLogin");
+
+    if (isLoggedIn !== "true") {
+      router.push("/admin-login");
+      return;
+    }
+
+    const savedOrders = JSON.parse(
+      localStorage.getItem("orders") || "[]"
+    );
     setOrders(savedOrders);
-  }, []);
+  }, [router]);
 
   const totalSales = orders.reduce(
     (sum, order) => sum + order.total,
     0
   );
+
+  const logout = () => {
+    localStorage.removeItem("adminLogin");
+    router.push("/admin-login");
+  };
 
   return (
     <div style={{
@@ -25,9 +42,19 @@ export default function Admin() {
         Admin Dashboard 👩‍💻
       </h1>
 
+      <button onClick={logout} style={{
+        background: "#e85d04",
+        color: "white",
+        padding: "10px 20px",
+        border: "none",
+        borderRadius: "8px",
+        cursor: "pointer"
+      }}>
+        Logout
+      </button>
+
       <h2>Total Orders: {orders.length}</h2>
       <h2>Total Sales: ₹{totalSales}</h2>
-
       <h2>Customer Orders 📦</h2>
 
       {orders.length === 0 ? (
