@@ -41,7 +41,28 @@ export default function OrderHistory() {
 
             <h3>Total: ₹{order.total}</h3>
             <p>
+ 
+<p style={{
+  display: "inline-block",
+  padding: "8px 15px",
+  borderRadius: "20px",
+  fontWeight: "bold",
+  background:
+    order.status === "Accepted"
+      ? "#d4edda"
+      : order.status === "Rejected"
+      ? "#f8d7da"
+      : "#fff3cd",
+  color:
+    order.status === "Accepted"
+      ? "green"
+      : order.status === "Rejected"
+      ? "red"
+      : "#856404"
+}}>
   Status: {order.status || "Pending"}
+</p>
+
 </p>
           </div>
         ))
