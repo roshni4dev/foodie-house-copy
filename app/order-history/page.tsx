@@ -40,6 +40,9 @@ export default function OrderHistory() {
             ))}
 
             <h3>Total: ₹{order.total}</h3>
+            <p>
+  Status: {order.status || "Pending"}
+</p>
           </div>
         ))
       )}
