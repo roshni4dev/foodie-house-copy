@@ -89,31 +89,61 @@ export default function Admin() {
               Status: {order.status || "Pending"}
             </p>
 
-            <button
-              onClick={() => updateStatus(index, "Accepted")}
-              style={{
-                background: "green",
-                color: "white",
-                padding: "10px",
-                marginRight: "10px"
-              }}
-            >
-              Accept
-            </button>
+          <button
+  onClick={() => updateStatus(index, "Accepted")}
+  style={{
+    background: "green",
+    color: "white",
+    padding: "10px",
+    marginRight: "10px"
+  }}
+>
+  Accept
+</button>
 
-            <button
-              onClick={() => updateStatus(index, "Rejected")}
-              style={{
-                background: "red",
-                color: "white",
-                padding: "10px"
-              }}
-            >
-              Reject
-            </button>
-          </div>
-        ))
-      )}
-    </div>
-  );
-}
+<button
+  onClick={() => updateStatus(index, "Rejected")}
+  style={{
+    background: "red",
+    color: "white",
+    padding: "10px",
+    marginRight: "10px"
+  }}
+>
+  Reject
+</button>
+
+<button
+  onClick={() => updateStatus(index, "Preparing")}
+  style={{
+    background: "orange",
+    color: "white",
+    padding: "10px",
+    marginRight: "10px"
+  }}
+>
+  Preparing 🍕
+</button>
+
+<button
+  onClick={() => updateStatus(index, "Out for Delivery")}
+  style={{
+    background: "blue",
+    color: "white",
+    padding: "10px",
+    marginRight: "10px"
+  }}
+>
+  Out for Delivery 🛵
+</button>
+
+<button
+  onClick={() => updateStatus(index, "Delivered")}
+  style={{
+    background: "purple",
+    color: "white",
+    padding: "10px"
+  }}
+>
+  Delivered 🎉
+</button>
