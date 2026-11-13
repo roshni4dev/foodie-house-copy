@@ -110,8 +110,20 @@ export default function Menu() {
       <h2>🛒 My Cart: {cart}</h2>
       <h2>Total Price: ₹{total}</h2>
 
-      <Link href="/checkout">
-        <Link href="/order-history">
+    <Link href="/checkout">
+  <button style={{
+    background: "#29201b",
+    color: "white",
+    padding: "14px 25px",
+    border: "none",
+    borderRadius: "25px",
+    cursor: "pointer"
+  }}>
+    Go to Checkout
+  </button>
+</Link>
+
+<Link href="/order-history">
   <button style={{
     background: "#e85d04",
     color: "white",
