@@ -111,17 +111,7 @@ export default function Menu() {
       <h2>Total Price: ₹{total}</h2>
 
     <Link href="/checkout">
-  <button style={{
-    background: "#29201b",
-    color: "white",
-    padding: "14px 25px",
-    border: "none",
-    borderRadius: "25px",
-    cursor: "pointer"
-  }}>
-    Go to Checkout
-  </button>
-</Link>
+ 
 
 <Link href="/order-history">
   <button style={{
