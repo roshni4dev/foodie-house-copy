@@ -61,6 +61,7 @@ export default function OrderHistory() {
       : "#856404"
 }}>
   Status: {order.status || "Pending"}
+  <p>Delivery Time: {order.deliveryTime || "Not available"}</p>
 </p>
 
 </p>
