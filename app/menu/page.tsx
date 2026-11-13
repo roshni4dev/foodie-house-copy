@@ -3,96 +3,125 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 export default function Menu() {
-    const [cart, setCart] = useState(0);
-    const [total, setTotal] = useState(0);
-    const addToCart = (name: string, price: number) => {
-        const oldCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const [cart, setCart] = useState(0);
+  const [total, setTotal] = useState(0);
 
-        oldCart.push({ name, price });
+  const addToCart = (name: string, price: number) => {
+    const oldCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-        localStorage.setItem("cart", JSON.stringify(oldCart));
+    const newCart = [...oldCart, { name, price }];
 
-        alert(name + " added to cart!");
-    };
-    return (
-        <div className="menu-container">
+    localStorage.setItem("cart", JSON.stringify(newCart));
 
-            <h1>Our Food Menu 🍕</h1>
-            <div className="food-list">
+    setCart(newCart.length);
+    setTotal(newCart.reduce((sum: number, item: { price: number }) => sum + item.price, 0));
 
-                <div className="food-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgffgoEFpnQ-if-MgkHtYH2Jk27O4UTMzlwSc3e7X_jA&s=10" alt="Cheese Pizza" width="200" />
-                    <h2>Cheese Pizza</h2>
-                    <p>Price: ₹199</p>
-                    <button onClick={() => addToCart("Cheese Pizza", 199)}>
-                        Add to Cart
-                    </button>
-                </div>
+    alert(name + " added to cart!");
+  };
 
-                <div className="food-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjWYnECYLaMBqyuTXV8fOpDvlFevNj5QPbLHU7ZvGKqw&s=10" alt="Italian Pizza" width="200" />
-                    <h2>Italian Pizza</h2>
-                    <p>Price: ₹249</p>
-                    <button onClick={() => addToCart("Italian Pizza", 249)}>
-                        Add to Cart
-                    </button>
-                </div>
+  const foods = [
+    {
+      name: "Cheese Pizza",
+      price: 199,
+      image: "https://images.unsplash.com/photo-1571066811602-716837d681de?w=400"
+    },
+    {
+      name: "Italian Pizza",
+      price: 249,
+      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400"
+    },
+    {
+      name: "Farmhouse Pizza",
+      price: 299,
+      image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400"
+    },
+    {
+      name: "Momos",
+      price: 199,
+      image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400"
+    },
+    {
+      name: "Veg Burger",
+      price: 99,
+      image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"
+    },
+    {
+      name: "White Sauce Pasta",
+      price: 149,
+      image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400"
+    }
+  ];
 
-                <div className="food-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl0a6Kqz2lcBGGjRLOTwN7vaw6rnDXzjE0_7FlY0USrklKly35l1b3X_s&s=10" alt="Farmhouse Pizza" width="200" />
-                    <h2>Farmhouse Pizza</h2>
-                    <p>Price: ₹299</p>
-                    <button onClick={() => addToCart("Farmhouse Pizza", 299)}>
-                        Add to Cart
-                    </button>
-                </div>
+  return (
+    <div style={{
+      padding: "30px",
+      background: "#fffaf3",
+      minHeight: "100vh",
+      textAlign: "center"
+    }}>
+      <h1 style={{ color: "#e85d04" }}>Our Food Menu 🍕</h1>
 
-            </div>
-            <h2>🛒 My Cart: {cart}</h2>
-            <h2>Total Price: ₹{total}</h2>
-            <Link href="/checkout">
-                <button>Go to Checkout</button>
-            </Link>
-            <div className="food-list">
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: "25px",
+        marginTop: "30px"
+      }}>
+        {foods.map((food) => (
+          <div key={food.name} style={{
+            background: "white",
+            padding: "15px",
+            borderRadius: "15px",
+            boxShadow: "0 4px 15px #00000015"
+          }}>
+            <img
+              src={food.image}
+              alt={food.name}
+              style={{
+                width: "100%",
+                height: "170px",
+                objectFit: "cover",
+                borderRadius: "12px"
+              }}
+            />
 
-                <div className="food-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk8Qhcdc5TpPSOCcKGuCsUtx96IZUBqCM_QRdMgJusLUHplYIsJML1J48&s=10" alt="momos" />
-                    <h2>momos</h2>
-                    <p>Price: ₹199</p>
-                    <button onClick={() => {
-                        setCart(cart + 1);
-                        setTotal(total + 199);
-                    }}>
-                        Add to Cart
-                    </button>
-                </div>
+            <h2>{food.name}</h2>
+            <h3 style={{ color: "#e85d04" }}>₹{food.price}</h3>
 
-                <div className="food-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRvV8Oc1WsrWNB2EMsZ_dhEyHFeEHolXWcXNo4YUjas92tko3Wi-Nt6Q&s=10" alt="Burger" />
-                    <h2>Veg Burger</h2>
-                    <p>Price: ₹99</p>
-                    <button onClick={() => {
-                        setCart(cart + 1);
-                        setTotal(total + 99);
-                    }}>
-                        Add to Cart
-                    </button>
-                </div>
+            <button
+              onClick={() => addToCart(food.name, food.price)}
+              style={{
+                background: "#e85d04",
+                color: "white",
+                padding: "12px 20px",
+                border: "none",
+                borderRadius: "25px",
+                cursor: "pointer"
+              }}
+            >
+              Add to Cart 🛒
+            </button>
+          </div>
+        ))}
+      </div>
 
-                <div className="food-item">
-                    <img src="https://www.sharmispassions.com/wp-content/uploads/2020/03/WhiteSaucePasta6.jpg" alt="Pasta" />
-                    <h2>White Sauce Pasta</h2>
-                    <p>Price: ₹149</p>
-                    <button onClick={() => {
-                        setCart(cart + 1);
-                        setTotal(total + 149);
-                    }}>
-                        Add to Cart
-                    </button>
-                </div>
+      <h2>🛒 My Cart: {cart}</h2>
+      <h2>Total Price: ₹{total}</h2>
 
-            </div>
-        </div>
-    );
+      <Link href="/checkout">
+        <button style={{
+          background: "#29201b",
+          color: "white",
+          padding: "14px 25px",
+          border: "none",
+          borderRadius: "25px",
+          cursor: "pointer"
+        }}>
+          Go to Checkout
+        </button>
+      </Link>
+    </div>
+  );
 }
