@@ -176,6 +176,4 @@ setFeedback(savedFeedback);
     </div>
   ))
 )}
-    </div>
-  );
-}
+  
