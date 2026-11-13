@@ -78,7 +78,8 @@ export default function Checkout() {
                         mobile: mobile,
                         address: address,
                         items: cart,
-                        total: total
+                      total: total,
+deliveryTime: "30-45 Minutes"
                     };
 
                     localStorage.setItem("lastOrder", JSON.stringify(order));
