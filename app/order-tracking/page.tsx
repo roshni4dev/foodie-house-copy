@@ -7,10 +7,15 @@ export default function OrderTracking() {
   const [order, setOrder] = useState<any>(null);
 
   useEffect(() => {
-    const savedOrder = JSON.parse(
-      localStorage.getItem("lastOrder") || "null"
-    );
-    setOrder(savedOrder);
+   const savedOrders = JSON.parse(
+  localStorage.getItem("orders") || "[]"
+);
+
+const savedOrder = savedOrders.length
+  ? savedOrders[savedOrders.length - 1]
+  : JSON.parse(localStorage.getItem("lastOrder") || "null");
+
+setOrder(savedOrder);
   }, []);
 
   if (!order) {
