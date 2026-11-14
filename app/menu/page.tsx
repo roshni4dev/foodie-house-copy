@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Menu() {
   const [cart, setCart] = useState(0);
   const [total, setTotal] = useState(0);
+  const [search, setSearch] = useState("");
 
   const addToCart = (name: string, price: number) => {
     const oldCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -53,7 +54,9 @@ export default function Menu() {
       image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400"
     }
   ];
-
+const filteredFoods = foods.filter((food) =>
+  food.name.toLowerCase().includes(search.toLowerCase())
+);
   return (
     <div style={{
       padding: "30px",
@@ -62,14 +65,27 @@ export default function Menu() {
       textAlign: "center"
     }}>
       <h1 style={{ color: "#e85d04" }}>Our Food Menu 🍕</h1>
-
+<input
+  type="text"
+  placeholder="Search Food 🔍"
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  style={{
+    padding: "12px",
+    width: "80%",
+    maxWidth: "400px",
+    marginTop: "20px",
+    borderRadius: "10px",
+    border: "1px solid gray"
+  }}
+/>
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
         gap: "25px",
         marginTop: "30px"
       }}>
-        {foods.map((food) => (
+        {filteredFoods.map((food) => (
           <div key={food.name} style={{
             background: "white",
             padding: "15px",
