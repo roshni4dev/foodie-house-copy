@@ -43,21 +43,23 @@ const updatedCustomer = { ...customer, name, email };
   }
 
   return (
-    <div style={{
-      padding: "40px 20px",
-      textAlign: "center",
-      background: "#fffaf3",
-      minHeight: "100vh"
-    }}>
+   <div style={{
+  padding: "50px 20px",
+  textAlign: "center",
+  background: "linear-gradient(135deg, #fff7ed, #ffedd5)",
+  minHeight: "100vh",
+  fontFamily: "Arial, sans-serif"
+}}>
       <h1>My Profile 👤</h1>
 
       <div style={{
         background: "white",
+     border: "1px solid #fed7aa",
         padding: "30px",
-        borderRadius: "15px",
+        borderRadius: "22px",
         maxWidth: "400px",
         margin: "30px auto",
-        boxShadow: "0 5px 20px #00000015"
+        boxShadow: "0 10px 30px rgba(234, 88, 12, 0.15)"
       }}>
         <h2>Welcome! ❤️</h2>
         <p><strong>Name:</strong> {customer.name}</p>
@@ -66,8 +68,21 @@ const updatedCustomer = { ...customer, name, email };
   value={name}
   onChange={(e) => setName(e.target.value)}
 />
-<br /><br />
-        <button onClick={updateProfile}>Update Profile</button>
+<br /><br /><button
+  onClick={updateProfile}
+  style={{
+    background: "#ea580c",
+    color: "white",
+    padding: "12px 28px",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "16px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Update Profile
+</button>
 <br /><br />
         <p><strong>Email:</strong> {customer.email}</p>
         <input
@@ -80,7 +95,7 @@ const updatedCustomer = { ...customer, name, email };
         <button
           onClick={logout}
           style={{
-            background: "#e85d04",
+background: "#374151",
             color: "white",
             padding: "12px 25px",
             border: "none",
