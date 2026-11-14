@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Profile() {
   const [customer, setCustomer] = useState<any>(null);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function Profile() {
     } else {
       setCustomer(savedUser);
       setName(savedUser.name || "");
+      setEmail(savedUser.email || "");
     }
   }, [router]);
 const updateProfile = () => {
@@ -26,7 +28,7 @@ const updateProfile = () => {
     return;
   }
 
-  const updatedCustomer = { ...customer, name };
+const updatedCustomer = { ...customer, name, email };
   localStorage.setItem("customer", JSON.stringify(updatedCustomer));
   setCustomer(updatedCustomer);
   alert("Profile Updated! ❤️");
@@ -68,6 +70,12 @@ const updateProfile = () => {
 <button onClick={updateProfile}>Update Name</button>
 <br /><br />
         <p><strong>Email:</strong> {customer.email}</p>
+        <input
+  placeholder="Enter New Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+<br /><br />
 
         <button
           onClick={logout}
