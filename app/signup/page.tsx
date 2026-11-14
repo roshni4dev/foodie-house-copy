@@ -4,19 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const signup = () => {
-    if (!email || !password) {
-      alert("Please enter email and password!");
+    if (!name || !email || !password) {
+      alert("Please fill all details!");
       return;
     }
 
     localStorage.setItem(
       "customer",
-      JSON.stringify({ email, password })
+      JSON.stringify({ name, email, password })
     );
 
     alert("Signup Successful! ❤️");
@@ -26,6 +27,14 @@ export default function Signup() {
   return (
     <div style={{ padding: "30px", textAlign: "center" }}>
       <h1>Customer Signup 👤</h1>
+
+      <input
+        placeholder="Enter Your Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <br /><br />
 
       <input
         placeholder="Enter Email"
