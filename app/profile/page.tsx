@@ -8,6 +8,8 @@ export default function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [password, setPassword] = useState("");
+const [newPassword, setNewPassword] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -46,6 +48,28 @@ const updatedCustomer = { ...customer, name, email, profileImage };
   localStorage.setItem("customer", JSON.stringify(updatedCustomer));
   setCustomer(updatedCustomer);
   alert("Profile Updated! ❤️");
+};
+  const changePassword = () => {
+  if (password !== customer.password) {
+    alert("Old password is incorrect!");
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    alert("New password must be at least 6 characters!");
+    return;
+  }
+
+  const updatedCustomer = {
+    ...customer,
+    password: newPassword
+  };
+
+  localStorage.setItem("customer", JSON.stringify(updatedCustomer));
+  setCustomer(updatedCustomer);
+  setPassword("");
+  setNewPassword("");
+  alert("Password Changed Successfully! ❤️");
 };
   const logout = () => {
     localStorage.removeItem("customer");
@@ -127,6 +151,31 @@ const updatedCustomer = { ...customer, name, email, profileImage };
   value={email}
   onChange={(e) => setEmail(e.target.value)}
 />
+<br /><br />
+        <h3>Change Password 🔐</h3>
+
+<input
+  type="password"
+  placeholder="Enter Old Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+
+<br /><br />
+
+<input
+  type="password"
+  placeholder="Enter New Password"
+  value={newPassword}
+  onChange={(e) => setNewPassword(e.target.value)}
+/>
+
+<br /><br />
+
+<button onClick={changePassword}>
+  Change Password
+</button>
+
 <br /><br />
 
         <button
