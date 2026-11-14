@@ -16,6 +16,17 @@ export default function Checkout() {
     }, []);
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const [coupon, setCoupon] = useState("");
+const [discount, setDiscount] = useState(0);
+    const applyCoupon = () => {
+    if (coupon === "FOOD20") {
+        setDiscount(total * 0.20);
+        alert("20% Discount Applied! 🎉");
+    } else {
+        setDiscount(0);
+        alert("Invalid Coupon Code!");
+    }
+};
 
     const removeItem = (index: number) => {
         const newCart = cart.filter((_, i) => i !== index);
@@ -43,6 +54,19 @@ export default function Checkout() {
             )}
 
             <h2>Total Price: ₹{total}</h2>
+            <input
+    type="text"
+    placeholder="Enter Coupon Code"
+    value={coupon}
+    onChange={(e) => setCoupon(e.target.value)}
+/>
+
+<button onClick={applyCoupon}>
+    Apply Coupon
+</button>
+
+<h3>Discount: ₹{discount}</h3>
+<h2>Final Total: ₹{total - discount}</h2>
 
             <h3>Customer Details</h3>
 
@@ -78,7 +102,7 @@ export default function Checkout() {
                         mobile: mobile,
                         address: address,
                         items: cart,
-                      total: total,
+                      total: total - discount,
 deliveryTime: "30-45 Minutes"
                     };
 
