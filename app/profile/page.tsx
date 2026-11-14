@@ -67,7 +67,7 @@ const updatedCustomer = { ...customer, name, email };
   onChange={(e) => setName(e.target.value)}
 />
 <br /><br />
-<button onClick={updateProfile}>Update Name</button>
+        <button onClick={updateProfile}>Update Profile</button>
 <br /><br />
         <p><strong>Email:</strong> {customer.email}</p>
         <input
