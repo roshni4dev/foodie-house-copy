@@ -46,6 +46,7 @@ export default function Profile() {
         boxShadow: "0 5px 20px #00000015"
       }}>
         <h2>Welcome! ❤️</h2>
+        <p><strong>Name:</strong> {customer.name}</p>
         <p><strong>Email:</strong> {customer.email}</p>
 
         <button
