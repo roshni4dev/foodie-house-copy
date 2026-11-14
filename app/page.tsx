@@ -48,6 +48,8 @@ export default function Home() {
           <Link href="/" style={{ color: "#29201b", textDecoration: "none" }}>Home</Link>
           <Link href="/menu" style={{ color: "#29201b", textDecoration: "none" }}>Menu</Link>
           <Link href="/checkout" style={{ color: "#29201b", textDecoration: "none" }}>Checkout</Link>
+          <Link href="/login" style={{ color: "#29201b", textDecoration: "none" }}>Login</Link>
+<Link href="/signup" style={{ color: "#29201b", textDecoration: "none" }}>Signup</Link>
         </div>
       </nav>
 
