@@ -7,6 +7,7 @@ export default function Profile() {
   const [customer, setCustomer] = useState<any>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -20,15 +21,28 @@ export default function Profile() {
       setCustomer(savedUser);
       setName(savedUser.name || "");
       setEmail(savedUser.email || "");
+      setProfileImage(savedUser.profileImage || "");
     }
   }, [router]);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setProfileImage(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
+  }
+};
 const updateProfile = () => {
   if (!name.trim()) {
     alert("Please enter your name!");
     return;
   }
-
-const updatedCustomer = { ...customer, name, email };
+const updatedCustomer = { ...customer, name, email, profileImage };
   localStorage.setItem("customer", JSON.stringify(updatedCustomer));
   setCustomer(updatedCustomer);
   alert("Profile Updated! ❤️");
@@ -62,6 +76,29 @@ const updatedCustomer = { ...customer, name, email };
         boxShadow: "0 10px 30px rgba(234, 88, 12, 0.15)"
       }}>
         <h2>Welcome! ❤️</h2>
+        {profileImage && (
+  <img
+    src={profileImage}
+    alt="Profile"
+    style={{
+      width: "120px",
+      height: "120px",
+      borderRadius: "50%",
+      objectFit: "cover",
+      border: "4px solid #ea580c"
+    }}
+  />
+)}
+
+<br /><br />
+
+<input
+  type="file"
+  accept="image/*"
+  onChange={handleImageChange}
+/>
+
+<br /><br />
         <p><strong>Name:</strong> {customer.name}</p>
         <input
   placeholder="Enter New Name"
@@ -95,7 +132,7 @@ const updatedCustomer = { ...customer, name, email };
         <button
           onClick={logout}
           style={{
-background: "#374151",
+background: "#dc2626",
             color: "white",
             padding: "12px 25px",
             border: "none",
